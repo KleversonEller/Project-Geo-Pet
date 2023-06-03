@@ -10,8 +10,17 @@ namespace project_geopet.Controllers;
 
 public class GeoPetController : ControllerBase
 {
+    [HttpGet]
+    [Route("AllCaringPersons")]
+    public IActionResult Get(
+        [FromServices] GeoPetContext context)
+    {
+        var caringpersons = context.CaringPersons.ToList();
+        return Ok(caringpersons);
+    }
+
     [HttpPost]
-    [Route("CreateCaringPerson")]
+    [Route("CaringPerson")]
     public async Task<IActionResult> Post(
         [FromServices] GeoPetContext context,
         [FromBody] CaringPersonRequest request)
