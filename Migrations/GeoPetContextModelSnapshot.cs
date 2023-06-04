@@ -19,12 +19,13 @@ namespace project_geopet.Migrations
 
             modelBuilder.Entity("project_geopet.Models.CaringPerson", b =>
                 {
-                    b.Property<Guid>("CaringPersonId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Cep")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
@@ -44,21 +45,21 @@ namespace project_geopet.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("CaringPersonId");
+                    b.HasKey("Id");
 
                     b.ToTable("CaringPersons");
                 });
 
             modelBuilder.Entity("project_geopet.Models.Pet", b =>
                 {
-                    b.Property<Guid>("PetId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid?>("CaringPersonId")
+                    b.Property<Guid>("CaringPersonId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Carrying")
@@ -79,7 +80,7 @@ namespace project_geopet.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PetId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CaringPersonId");
 
@@ -90,7 +91,9 @@ namespace project_geopet.Migrations
                 {
                     b.HasOne("project_geopet.Models.CaringPerson", "CaringPerson")
                         .WithMany("Pets")
-                        .HasForeignKey("CaringPersonId");
+                        .HasForeignKey("CaringPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CaringPerson");
                 });

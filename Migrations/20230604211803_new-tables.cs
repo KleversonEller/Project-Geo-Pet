@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace project_geopet.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreated : Migration
+    public partial class newtables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,42 +15,41 @@ namespace project_geopet.Migrations
                 name: "CaringPersons",
                 columns: table => new
                 {
-                    CaringPersonId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Email = table.Column<string>(type: "TEXT", nullable: false),
-                    Cep = table.Column<int>(type: "INTEGER", nullable: false),
+                    Cep = table.Column<string>(type: "TEXT", nullable: false),
                     Password = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CaringPersons", x => x.CaringPersonId);
+                    table.PrimaryKey("PK_CaringPersons", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Pets",
                 columns: table => new
                 {
-                    PetId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Age = table.Column<int>(type: "INTEGER", nullable: false),
                     Carrying = table.Column<string>(type: "TEXT", nullable: false),
                     Race = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    CaringPersonId = table.Column<int>(type: "INTEGER", nullable: true)
+                    CaringPersonId = table.Column<Guid>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pets", x => x.PetId);
+                    table.PrimaryKey("PK_Pets", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Pets_CaringPersons_CaringPersonId",
                         column: x => x.CaringPersonId,
                         principalTable: "CaringPersons",
-                        principalColumn: "CaringPersonId");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -11,8 +11,8 @@ using project_geopet.Data;
 namespace project_geopet.Migrations
 {
     [DbContext(typeof(GeoPetContext))]
-    [Migration("20230603072132_InitialCreated")]
-    partial class InitialCreated
+    [Migration("20230604211803_new-tables")]
+    partial class newtables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,12 +22,13 @@ namespace project_geopet.Migrations
 
             modelBuilder.Entity("project_geopet.Models.CaringPerson", b =>
                 {
-                    b.Property<int>("CaringPersonId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int>("Cep")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("TEXT");
@@ -47,22 +48,22 @@ namespace project_geopet.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("CaringPersonId");
+                    b.HasKey("Id");
 
                     b.ToTable("CaringPersons");
                 });
 
             modelBuilder.Entity("project_geopet.Models.Pet", b =>
                 {
-                    b.Property<int>("PetId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("CaringPersonId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid>("CaringPersonId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Carrying")
                         .IsRequired()
@@ -82,7 +83,7 @@ namespace project_geopet.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("PetId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CaringPersonId");
 
@@ -93,7 +94,9 @@ namespace project_geopet.Migrations
                 {
                     b.HasOne("project_geopet.Models.CaringPerson", "CaringPerson")
                         .WithMany("Pets")
-                        .HasForeignKey("CaringPersonId");
+                        .HasForeignKey("CaringPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CaringPerson");
                 });
