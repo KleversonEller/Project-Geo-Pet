@@ -9,7 +9,7 @@ public class CaringPersonRequest
     [Required]
     public string Email {get; set;}
     [Required]
-    public int Cep {get; set;}
+    public string Cep {get; set;}
     [Required]
     public string Password {get; set;}
 }
