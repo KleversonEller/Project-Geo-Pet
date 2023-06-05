@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using project_geopet.Models;
 
 namespace project_geopet.Request;
 
