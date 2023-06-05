@@ -1,7 +1,7 @@
 // using QRCoder;
 // using System.Drawing;
 
-// namespace project_geopet.Utils;
+// namespace project_geopet.Services;
 
 // public static class QRCodeInfos
 // {
