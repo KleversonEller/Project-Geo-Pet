@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using project_geopet.Models;
 using project_geopet.Request;
 using project_geopet.Data;
@@ -6,6 +7,7 @@ using project_geopet.Data;
 namespace project_geopet.Controllers;
 
 [ApiController]
+[Authorize]
 [Route(template: "[controller]")]
 
 public class PetController : ControllerBase

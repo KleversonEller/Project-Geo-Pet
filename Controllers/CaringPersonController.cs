@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using project_geopet.Models;
 using project_geopet.Data;
 using project_geopet.Request;
@@ -13,6 +14,7 @@ namespace project_geopet.Controllers;
 public class CaringPersonController : ControllerBase
 {
     [HttpGet]
+    [AllowAnonymous]
     public IActionResult Get(
         [FromServices] GeoPetContext context)
     {
@@ -22,6 +24,7 @@ public class CaringPersonController : ControllerBase
 
 
     [HttpGet]
+    [Authorize]
     [Route("{id}")]
     public async Task<IActionResult> Get(
         [FromServices] GeoPetContext context,
@@ -33,6 +36,7 @@ public class CaringPersonController : ControllerBase
 
 
     [HttpGet]
+    [Authorize]
     [Route("{id}/Pets")]
     public async Task<IActionResult> GetPets(
         [FromServices] GeoPetContext context,
@@ -44,6 +48,7 @@ public class CaringPersonController : ControllerBase
 
 
     [HttpPost]
+    [AllowAnonymous]
     public async Task<IActionResult> Post(
         [FromServices] GeoPetContext context,
         [FromBody] CaringPersonRequest request)
@@ -74,6 +79,7 @@ public class CaringPersonController : ControllerBase
 
 
     [HttpPut]
+    [Authorize]
     [Route("{id}")]
     public async Task<IActionResult> Put(
         [FromServices] GeoPetContext context,
@@ -105,6 +111,7 @@ public class CaringPersonController : ControllerBase
 
 
     [HttpDelete]
+    [Authorize]
     [Route("{id}")]
     public async Task<IActionResult> Delete(
         [FromServices] GeoPetContext context,
