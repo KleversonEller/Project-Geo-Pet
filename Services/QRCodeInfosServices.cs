@@ -1,30 +1,26 @@
-// using QRCoder;
-// using System.Drawing;
+using MessagingToolkit.QRCode.Codec;
+using System.Drawing;
+using project_geopet.Models;
 
-// namespace project_geopet.Services;
+namespace project_geopet.Services;
 
-// public static class QRCodeInfos
-// {
-//     public static Bitmap GenerateQRCode(string name, string email, string cep)
-//     {
-//         QRCodeGenerator qrGeneration = new();
-//         QRCodeData qrCodeData = qrGeneration
-//             .CreateQrCode($"{name} - {email} - {cep}", QRCodeGenerator.ECCLevel.Q);
-//         QRCode qrCode = new(qrCodeData);
-//         Bitmap qrCodeImage = qrCode.GetGraphic(20);
-//         return qrCodeImage;
-//     }
-
-//     public static byte[] GenerateByteArray(string name, string email, string cep)
-//     {
-//         var image = GenerateQRCode(name, email, cep);
-//         return ImageToByte(image);
-//     }
-
-//     private static byte[] ImageToByte(Image img)
-//     {
-//         using var stream = new MemoryStream();
-//         img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
-//         return stream.ToArray();
-//     }
-// }
+public static class QRCodeInfos
+{
+    public static Bitmap GenerateQRCode(Pet infos)
+    {
+        QRCodeEncoder qrCodecEncoder = new()
+        {
+            QRCodeBackgroundColor = Color.White,
+            QRCodeForegroundColor = Color.Black,
+            CharacterSet = "UTF-8",
+            QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE,
+            QRCodeScale = 6,
+            QRCodeVersion = 0,
+            QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.Q
+        };
+        Bitmap imageQRCode;
+        Pet dados = infos;
+        imageQRCode = qrCodecEncoder.Encode(dados.ToString());
+        return imageQRCode;
+    }
+}
