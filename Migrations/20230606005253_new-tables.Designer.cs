@@ -11,7 +11,7 @@ using project_geopet.Data;
 namespace project_geopet.Migrations
 {
     [DbContext(typeof(GeoPetContext))]
-    [Migration("20230604211803_new-tables")]
+    [Migration("20230606005253_new-tables")]
     partial class newtables
     {
         /// <inheritdoc />
