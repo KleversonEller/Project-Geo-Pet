@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using project_geopet.Models;
 using project_geopet.Data;
 using project_geopet.Request;
-// using System.Drawing;
-// using project_geopet.Utils;
+using project_geopet.Middleware;
 
 namespace project_geopet.Controllers;
 
@@ -54,6 +53,7 @@ public class CaringPersonController : ControllerBase
         [FromBody] CaringPersonRequest request)
     {
         if(!ModelState.IsValid) return BadRequest();
+        if(!CaringPersonMiddleware.ValidCep(request)) return BadRequest();
 
         var caringperson = new CaringPerson
         {
@@ -90,6 +90,8 @@ public class CaringPersonController : ControllerBase
 
         var caringperson = await context.CaringPersons.FindAsync(id);
         if(caringperson == null) return NotFound();
+
+        if(!CaringPersonMiddleware.ValidCep(request)) return BadRequest();
 
         try
         {
@@ -133,15 +135,4 @@ public class CaringPersonController : ControllerBase
             return BadRequest(e);
         }
     }
-
-
-    // [HttpGet]
-    // [Route("CaringPersonInfos/{id}")]
-    // public async Task<Bitmap> GetQRCode(
-    //     [FromServices] GeoPetContext context,
-    //     [FromRoute] Guid id)
-    // {
-    //     var infos = await context.CaringPersons.FindAsync(id);
-    //     return QRCodeInfos.GenerateQRCode(infos.Name, infos.Email, infos.Cep);
-    // }
 }
