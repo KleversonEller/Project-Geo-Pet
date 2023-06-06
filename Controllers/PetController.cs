@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using project_geopet.Models;
 using project_geopet.Request;
 using project_geopet.Data;
+using project_geopet.Services;
 
 namespace project_geopet.Controllers;
 
@@ -29,6 +30,19 @@ public class PetController : ControllerBase
     {
         var pet = await context.Pets.FindAsync(id);
         return pet == null ? NotFound() : Ok(pet);
+    }
+
+
+    [HttpGet]
+    [Route("{id}/Infos")]
+    public async Task<IActionResult> GetQRCode(
+        [FromServices] GeoPetContext context,
+        [FromRoute] Guid id)
+    {
+        var infos = await context.Pets.FindAsync(id);
+        if(infos == null) return BadRequest();
+
+        return Ok(QRCodeInfos.GenerateQRCode(infos));
     }
 
 
