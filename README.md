@@ -23,6 +23,10 @@ O objetivo é proporcionar um sistema para localização de Pets em tempo real a
   * <a href="https://jwt.io/" target="_blank" rel="external"><span><strong>JWT</strong></span></a> - Ferramenta de autenticação de dados.
 
   * <a href="https://www.microsoft.com/pt-br/sql-server/sql-server-downloads" target="_blank" rel="external"><span><strong>SQL Server(SQLite)</strong></span></a> - Banco de Dados.
+ 
+  * <a href="https://viacep.com.br/" target="_blank" rel="external"><span><strong>Via CEP API</strong></span></a> - Api dos correios.
+
+  * <a href="https://nominatim.org/release-docs/develop/" target="_blank" rel="external"><span><strong>Nominatim API</strong></span></a> - Api de Geo localização.
 
   * <a href="https://fluentassertions.com/" target="_blank" rel="external"><span><strong>FluentAssertions</strong></span></a> - Ferramenta de construção de testes.
 
