@@ -1,27 +1,3 @@
-# **Contexto do projeto**
-
-Aplicação para localização de Pets em tempo real a partir de uma longitude e latitude passada pela coleira do Pet.
-
-## **Stacks utilizadas no projeto**
-
-C#/.NET Core na versão 6.0
-<br/>
-Entity Framework Core
-<br/>
-JwtBearer
-<br/>
-SqlServer(SQLite)
-<br/>
-Messaging Toolkit QRCode
-<br/>
-A biblioteca de testes xUnit e a Fluent Assertions
-<br/>
-
-## **Como iniciar o projeto localmente**
-
-
-
-
 ## **Contexto** 
 ## Projeto Final - Aceleração em .NET C#
 <br />
