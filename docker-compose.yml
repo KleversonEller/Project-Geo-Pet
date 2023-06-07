@@ -1,0 +1,12 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP.NET Core service.
+
+version: '3.4'
+
+services:
+  projectgeopet:
+    image: projectgeopet
+    build:
+      context: .
+      dockerfile: src/Geo-Pet/Dockerfile
+    ports:
+      - 5223:5223
